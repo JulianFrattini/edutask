@@ -28,15 +28,21 @@ class UserController(Controller):
         if not re.fullmatch(emailValidator, email):
             raise ValueError('Error: invalid email address')
 
+        users = None
         try:
             users = self.dao.find({'email': email})
+        except Exception as e:
+            raise e
+
+        if users is not None:
             if len(users) == 1:
                 return users[0]
-            else:
-                print(f'Error: more than one user found with mail {email}')
+            elif len(users) > 1:
+                print(f'Error: more than one user found with email {email}')
                 return users[0]
-        except Exception as e:
-            raise
+            else:
+                return None
+        return users
 
     def update(self, id, data):
         try:
