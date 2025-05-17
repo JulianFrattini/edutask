@@ -2,7 +2,8 @@ from src.controllers.controller import Controller
 from src.util.dao import DAO
 
 import re
-emailValidator = re.compile(r'.*@.*')
+pattern = r'^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$'
+email_validator = re.compile(pattern)
 
 class UserController(Controller):
     def __init__(self, dao: DAO):
@@ -25,7 +26,7 @@ class UserController(Controller):
             Exception -- in case any database operation fails
         """
 
-        if not re.fullmatch(emailValidator, email):
+        if not re.fullmatch(email_validator, email):
             raise ValueError('Error: invalid email address')
 
         try:

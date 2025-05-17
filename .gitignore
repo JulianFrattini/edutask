@@ -31,6 +31,7 @@ yarn-error.log*
 data/db/
 *.coverage
 backend/.venv/
+backend/venv/
 backend/test/solutions/
 frontend/cypress/e2e/r8uc1-solution.cy.js
 frontend/cypress/fixtures/task.json
